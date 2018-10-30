@@ -1,0 +1,40 @@
+package: github.com/codersgarage/black-marlin-api
+
+import:
+- package: github.com/RichardKnop/machinery
+  version: ^1.4.9
+  subpackages:
+  - v1
+  - v1/config
+- package: github.com/codersgarage/black-marlin-api
+  subpackages:
+  - api
+  - app
+  - cmd
+  - cmd/migration
+  - config
+  - data
+  - errors
+  - log
+  - log/hooks
+  - models
+  - mq
+  - repos
+  - utils
+  - worker
+- package: github.com/go-chi/chi
+  version: ^3.3.3
+  subpackages:
+  - middleware
+- package: github.com/jinzhu/gorm
+  version: ^1.9.1
+  subpackages:
+  - dialects/postgres
+- package: github.com/sirupsen/logrus
+  version: ^1.1.1
+- package: github.com/spf13/cobra
+  version: ^0.0.3
+- package: github.com/spf13/viper
+  version: ^1.2.1
+  subpackages:
+  - remote
