@@ -2,10 +2,11 @@ package app
 
 import (
 	"fmt"
+
 	"github.com/codersgarage/black-marlin-api/config"
 	"github.com/codersgarage/black-marlin-api/log"
 	"github.com/jinzhu/gorm"
-	_ "github.com/jinzhu/gorm/dialects/postgres"
+	_ "github.com/jinzhu/gorm/dialects/mysql"
 )
 
 var instance *gorm.DB
