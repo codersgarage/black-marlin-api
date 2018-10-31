@@ -57,4 +57,10 @@ if [ "$cmd" = "m_auto" ]; then
     exit;
 fi
 
+if [ "$cmd" = "cleanup" ]; then
+    echo "Cleaning up and removing data.."
+    docker-compose down -v
+    exit;
+fi
+
 echo "No command specified"
