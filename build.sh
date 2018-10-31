@@ -14,6 +14,9 @@ binary="black-marlin-api"
 
 if [ "$cmd" = "run" ]; then
     echo "Executing run command"
+    docker-compose up -d
+    echo ".. putting consul config"
+    curl --request PUT --data-binary @config.example.yml http://localhost:8500/v1/kv/black-marlin-api
     ./${binary} serve
     exit;
 fi
@@ -27,6 +30,9 @@ fi
 
 if [ "$cmd" = "spew" ]; then
     echo "Executing spew command"
+    docker-compose up -d
+    echo ".. putting consul config"
+    curl --request PUT --data-binary @config.example.yml http://localhost:8500/v1/kv/black-marlin-api
     glide install
     go build -v -o ${binary}
     ./${binary} serve

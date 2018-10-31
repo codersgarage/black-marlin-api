@@ -1,4 +1,4 @@
 .idea
 vendor
-./black-marlin-api
+black-marlin-api
 glide.lock
