@@ -1,26 +1,21 @@
 # Black_Marlin_API
 
-:run_dependencies
-```bash
-docker-compose up
-```
-
-:build
+### build
 ```bash
 ./build.sh build
 ```
 
-:run
+### run
 ```bash
 ./build.sh run
 ```
 
-:build_and_run
+### build_and_run
 ```bash
 ./build.sh spew
 ```
 
-:cleanup
+### cleanup
 ```bash
-docker-compose down
+./build.sh clean
 ```

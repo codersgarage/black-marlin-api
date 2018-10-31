@@ -57,7 +57,7 @@ if [ "$cmd" = "m_auto" ]; then
     exit;
 fi
 
-if [ "$cmd" = "cleanup" ]; then
+if [ "$cmd" = "clean" ]; then
     echo "Cleaning up and removing data.."
     docker-compose down -v
     exit;
