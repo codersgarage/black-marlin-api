@@ -49,6 +49,7 @@ func registerRoutes() {
 		r.Get("/", index)
 
 		r.Mount("/monkeys", monkeyRoutes())
+		r.Mount("/auth", authRoutes())
 	})
 }
 
@@ -61,6 +62,16 @@ func monkeyRoutes() http.Handler {
 		r.Get("/{id}", hr.getMonkey)
 		r.Put("/{id}", hr.updateMonkey)
 		r.Delete("/{id}", hr.deleteMonkey)
+	})
+	return h
+}
+
+func authRoutes() http.Handler {
+	hr := NewAuthRoutes()
+	h := chi.NewRouter()
+	h.Group(func(r chi.Router) {
+		r.Post("/login", hr.loginUser)
+		r.Post("/signup", hr.registerUser)
 	})
 	return h
 }
