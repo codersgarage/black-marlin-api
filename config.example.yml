@@ -5,10 +5,10 @@ app:
 
 database:
   host: "localhost"
-  port: 3306
+  port: 5432
   username: "root"
   password: "boom"
-  name: "black-marlin-api"
+  name: "black_marlin_api"
 
 redis:
   port: 6789
