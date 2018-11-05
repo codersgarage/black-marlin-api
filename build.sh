@@ -23,7 +23,7 @@ fi
 
 if [ "$cmd" = "build" ]; then
     echo "Executing build command"
-    glide install
+    dep ensure -v
     go build -v -o ${binary}
     exit;
 fi
@@ -31,9 +31,9 @@ fi
 if [ "$cmd" = "spew" ]; then
     echo "Executing spew command"
     docker-compose up -d
+    dep ensure -v
     echo ".. putting consul config"
     curl --request PUT --data-binary @config.example.yml http://localhost:8500/v1/kv/black-marlin-api
-    glide install
     go build -v -o ${binary}
     ./${binary} serve
     exit;
