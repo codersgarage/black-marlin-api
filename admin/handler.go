@@ -21,7 +21,7 @@ type handler struct {
 
 func newRoutes() *handler {
 	return &handler{
-		Repo: NewRepo(),
+		Repo: newRepo(),
 	}
 }
 

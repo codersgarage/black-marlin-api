@@ -10,17 +10,17 @@ import (
 	"github.com/go-chi/chi"
 )
 
-type Repo struct {
+type repo struct {
 	data *data
 }
 
-func NewRepo() *Repo {
-	return &Repo{
+func newRepo() *repo {
+	return &repo{
 		data: newData(),
 	}
 }
 
-func (hr *Repo) Save(s *app.Scope) (*model, error) {
+func (hr *repo) Save(s *app.Scope) (*model, error) {
 	admin := &model{}
 	if err := utils.ParseBody(s.Request, admin); err != nil {
 		return nil, errors.NewAPIError(http.StatusBadRequest, "400001", "Unable to parse request body", nil)
@@ -38,7 +38,7 @@ func (hr *Repo) Save(s *app.Scope) (*model, error) {
 	return admin, nil
 }
 
-func (hr *Repo) Get(s *app.Scope) (*model, error) {
+func (hr *repo) Get(s *app.Scope) (*model, error) {
 	admin := &model{}
 
 	ID := chi.URLParam(s.Request, "id")
@@ -53,11 +53,11 @@ func (hr *Repo) Get(s *app.Scope) (*model, error) {
 	return admin, nil
 }
 
-func (hr *Repo) Update(s *app.Scope) (*model, error) {
+func (hr *repo) Update(s *app.Scope) (*model, error) {
 	return &model{}, nil
 }
 
-func (hr *Repo) List(s *app.Scope) ([]model, error) {
+func (hr *repo) List(s *app.Scope) ([]model, error) {
 	var data []model
 	if err := hr.data.List(s, &data); err != nil {
 		return nil, errors.NewAPIError(http.StatusInternalServerError, "500001", "Failed to list Admins", err)
@@ -68,6 +68,6 @@ func (hr *Repo) List(s *app.Scope) ([]model, error) {
 	return []model{}, nil
 }
 
-func (hr *Repo) Delete(s *app.Scope) error {
+func (hr *repo) Delete(s *app.Scope) error {
 	return nil
 }
