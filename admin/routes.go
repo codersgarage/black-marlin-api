@@ -8,15 +8,16 @@ import (
 
 var router = chi.NewRouter()
 
-func adminRoutes() http.Handler {
+// Routes ... endpoint definition
+func Routes() http.Handler {
 	hr := NewAdminRoutes()
 	h := chi.NewRouter()
 	h.Group(func(r chi.Router) {
-		r.Post("/", hr.saveAdmin)
-		r.Get("/", hr.listAdmin)
-		r.Get("/{id}", hr.getAdmin)
-		r.Patch("/{id}", hr.updateAdmin)
-		r.Delete("/{id}", hr.deleteAdmin)
+		r.Post("/", hr.save)
+		r.Get("/", hr.list)
+		r.Get("/{id}", hr.get)
+		r.Patch("/{id}", hr.update)
+		r.Delete("/{id}", hr.delete)
 	})
 	return h
 }

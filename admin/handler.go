@@ -7,7 +7,7 @@ import (
 	"github.com/codersgarage/black-marlin-api/errors"
 )
 
-type AdminApiRepo interface {
+type ApiRepo interface {
 	SaveAdmin(s *app.Scope) (*Admin, error)
 	GetAdmin(s *app.Scope) (*Admin, error)
 	UpdateAdmin(s *app.Scope) (*Admin, error)
@@ -15,17 +15,17 @@ type AdminApiRepo interface {
 	DeleteAdmin(s *app.Scope) error
 }
 
-type AdminRoutes struct {
-	Repo AdminApiRepo
+type ApiRoutes struct {
+	Repo ApiRepo
 }
 
-func NewAdminRoutes() *AdminRoutes {
-	return &AdminRoutes{
+func NewAdminRoutes() *ApiRoutes {
+	return &ApiRoutes{
 		Repo: NewAdminRepo(),
 	}
 }
 
-func (hr *AdminRoutes) saveAdmin(w http.ResponseWriter, r *http.Request) {
+func (hr *ApiRoutes) save(w http.ResponseWriter, r *http.Request) {
 	resp := response{}
 	Admin, err := hr.Repo.SaveAdmin(app.NewScope(app.DB(), r))
 	if err != nil {
@@ -43,7 +43,7 @@ func (hr *AdminRoutes) saveAdmin(w http.ResponseWriter, r *http.Request) {
 	resp.ServerJSON(w)
 }
 
-func (hr *AdminRoutes) getAdmin(w http.ResponseWriter, r *http.Request) {
+func (hr *ApiRoutes) get(w http.ResponseWriter, r *http.Request) {
 	resp := response{}
 	Admin, err := hr.Repo.GetAdmin(app.NewScope(app.DB(), r))
 	if err != nil {
@@ -60,7 +60,7 @@ func (hr *AdminRoutes) getAdmin(w http.ResponseWriter, r *http.Request) {
 	resp.ServerJSON(w)
 }
 
-func (hr *AdminRoutes) updateAdmin(w http.ResponseWriter, r *http.Request) {
+func (hr *ApiRoutes) update(w http.ResponseWriter, r *http.Request) {
 	resp := response{}
 	Admin, err := hr.Repo.UpdateAdmin(app.NewScope(app.DB(), r))
 	if err != nil {
@@ -77,7 +77,7 @@ func (hr *AdminRoutes) updateAdmin(w http.ResponseWriter, r *http.Request) {
 	resp.ServerJSON(w)
 }
 
-func (hr *AdminRoutes) listAdmin(w http.ResponseWriter, r *http.Request) {
+func (hr *ApiRoutes) list(w http.ResponseWriter, r *http.Request) {
 	resp := response{}
 	Admins, err := hr.Repo.ListAdmin(app.NewScope(app.DB(), r))
 	if err != nil {
@@ -94,6 +94,6 @@ func (hr *AdminRoutes) listAdmin(w http.ResponseWriter, r *http.Request) {
 	resp.ServerJSON(w)
 }
 
-func (hr *AdminRoutes) deleteAdmin(w http.ResponseWriter, r *http.Request) {
+func (hr *ApiRoutes) delete(w http.ResponseWriter, r *http.Request) {
 
 }
