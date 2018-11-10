@@ -8,26 +8,26 @@ import (
 )
 
 type ApiRepo interface {
-	SaveAdmin(s *app.Scope) (*Admin, error)
-	GetAdmin(s *app.Scope) (*Admin, error)
-	UpdateAdmin(s *app.Scope) (*Admin, error)
-	ListAdmin(s *app.Scope) ([]Admin, error)
-	DeleteAdmin(s *app.Scope) error
+	Save(s *app.Scope) (*Admin, error)
+	Get(s *app.Scope) (*Admin, error)
+	Update(s *app.Scope) (*Admin, error)
+	List(s *app.Scope) ([]Admin, error)
+	Delete(s *app.Scope) error
 }
 
 type ApiRoutes struct {
 	Repo ApiRepo
 }
 
-func NewAdminRoutes() *ApiRoutes {
+func NewRoutes() *ApiRoutes {
 	return &ApiRoutes{
-		Repo: NewAdminRepo(),
+		Repo: NewRepo(),
 	}
 }
 
 func (hr *ApiRoutes) save(w http.ResponseWriter, r *http.Request) {
 	resp := response{}
-	Admin, err := hr.Repo.SaveAdmin(app.NewScope(app.DB(), r))
+	Admin, err := hr.Repo.Save(app.NewScope(app.DB(), r))
 	if err != nil {
 		resp.Status = err.(*errors.APIError).Status
 		resp.Code = err.(*errors.APIError).Code
@@ -45,7 +45,7 @@ func (hr *ApiRoutes) save(w http.ResponseWriter, r *http.Request) {
 
 func (hr *ApiRoutes) get(w http.ResponseWriter, r *http.Request) {
 	resp := response{}
-	Admin, err := hr.Repo.GetAdmin(app.NewScope(app.DB(), r))
+	Admin, err := hr.Repo.Get(app.NewScope(app.DB(), r))
 	if err != nil {
 		resp.Status = err.(*errors.APIError).Status
 		resp.Code = err.(*errors.APIError).Code
@@ -62,7 +62,7 @@ func (hr *ApiRoutes) get(w http.ResponseWriter, r *http.Request) {
 
 func (hr *ApiRoutes) update(w http.ResponseWriter, r *http.Request) {
 	resp := response{}
-	Admin, err := hr.Repo.UpdateAdmin(app.NewScope(app.DB(), r))
+	Admin, err := hr.Repo.Update(app.NewScope(app.DB(), r))
 	if err != nil {
 		resp.Status = err.(*errors.APIError).Status
 		resp.Code = err.(*errors.APIError).Code
@@ -79,7 +79,7 @@ func (hr *ApiRoutes) update(w http.ResponseWriter, r *http.Request) {
 
 func (hr *ApiRoutes) list(w http.ResponseWriter, r *http.Request) {
 	resp := response{}
-	Admins, err := hr.Repo.ListAdmin(app.NewScope(app.DB(), r))
+	Admins, err := hr.Repo.List(app.NewScope(app.DB(), r))
 	if err != nil {
 		resp.Status = err.(*errors.APIError).Status
 		resp.Code = err.(*errors.APIError).Code

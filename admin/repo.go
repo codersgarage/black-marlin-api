@@ -10,17 +10,17 @@ import (
 	"github.com/go-chi/chi"
 )
 
-type AdminRepo struct {
+type Repo struct {
 	Dao *AdminDao
 }
 
-func NewAdminRepo() *AdminRepo {
-	return &AdminRepo{
+func NewRepo() *Repo {
+	return &Repo{
 		Dao: NewAdminDao(),
 	}
 }
 
-func (hr *AdminRepo) SaveAdmin(s *app.Scope) (*Admin, error) {
+func (hr *Repo) Save(s *app.Scope) (*Admin, error) {
 	admin := &Admin{}
 	if err := utils.ParseBody(s.Request, admin); err != nil {
 		return nil, errors.NewAPIError(http.StatusBadRequest, "400001", "Unable to parse request body", nil)
@@ -38,7 +38,7 @@ func (hr *AdminRepo) SaveAdmin(s *app.Scope) (*Admin, error) {
 	return admin, nil
 }
 
-func (hr *AdminRepo) GetAdmin(s *app.Scope) (*Admin, error) {
+func (hr *Repo) Get(s *app.Scope) (*Admin, error) {
 	admin := &Admin{}
 
 	ID := chi.URLParam(s.Request, "id")
@@ -53,11 +53,11 @@ func (hr *AdminRepo) GetAdmin(s *app.Scope) (*Admin, error) {
 	return admin, nil
 }
 
-func (hr *AdminRepo) UpdateAdmin(s *app.Scope) (*Admin, error) {
+func (hr *Repo) Update(s *app.Scope) (*Admin, error) {
 	return &Admin{}, nil
 }
 
-func (hr *AdminRepo) ListAdmin(s *app.Scope) ([]Admin, error) {
+func (hr *Repo) List(s *app.Scope) ([]Admin, error) {
 	var data []Admin
 	if err := hr.Dao.ListAdmins(s, &data); err != nil {
 		return nil, errors.NewAPIError(http.StatusInternalServerError, "500001", "Failed to list Admins", err)
@@ -68,6 +68,6 @@ func (hr *AdminRepo) ListAdmin(s *app.Scope) ([]Admin, error) {
 	return []Admin{}, nil
 }
 
-func (hr *AdminRepo) DeleteAdmin(s *app.Scope) error {
+func (hr *Repo) Delete(s *app.Scope) error {
 	return nil
 }
