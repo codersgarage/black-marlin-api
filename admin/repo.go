@@ -11,12 +11,12 @@ import (
 )
 
 type Repo struct {
-	data *Data
+	data *data
 }
 
 func NewRepo() *Repo {
 	return &Repo{
-		data: NewData(),
+		data: newData(),
 	}
 }
 

@@ -4,24 +4,24 @@ import (
 	"github.com/codersgarage/black-marlin-api/app"
 )
 
-type Data struct {
+type data struct {
 }
 
-func NewData() *Data {
-	return &Data{}
+func newData() *data {
+	return &data{}
 }
 
-func (hd *Data) Save(scope *app.Scope, admin *Model) error {
+func (hd *data) Save(scope *app.Scope, admin *Model) error {
 	return scope.DB.Table(admin.TableName()).Create(admin).Error
 }
 
-func (hd *Data) Get(scope *app.Scope, UUID string, v *Model) error {
+func (hd *data) Get(scope *app.Scope, UUID string, v *Model) error {
 	return scope.DB.
 		Table(v.TableName()).
 		Find(v, "uuid = ?", UUID).Error
 }
 
-func (hd *Data) List(scope *app.Scope, v interface{}) error {
+func (hd *data) List(scope *app.Scope, v interface{}) error {
 	admin := Model{}
 	return scope.DB.
 		Table(admin.TableName()).
