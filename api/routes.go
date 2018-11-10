@@ -3,6 +3,7 @@ package api
 import (
 	"net/http"
 
+	"github.com/codersgarage/black-marlin-api/admin"
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
 )
@@ -50,6 +51,7 @@ func registerRoutes() {
 
 		r.Mount("/monkeys", monkeyRoutes())
 		r.Mount("/auth", authRoutes())
+		r.Mount("/admin", admin.Routes())
 	})
 }
 
