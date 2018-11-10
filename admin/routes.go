@@ -10,7 +10,7 @@ var router = chi.NewRouter()
 
 // Routes ... endpoint definition
 func Routes() http.Handler {
-	hr := NewRoutes()
+	hr := newRoutes()
 	h := chi.NewRouter()
 	h.Group(func(r chi.Router) {
 		r.Post("/", hr.save)

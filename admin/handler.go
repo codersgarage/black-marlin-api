@@ -7,7 +7,7 @@ import (
 	"github.com/codersgarage/black-marlin-api/errors"
 )
 
-type Methods interface {
+type methods interface {
 	Save(s *app.Scope) (*Model, error)
 	Get(s *app.Scope) (*Model, error)
 	Update(s *app.Scope) (*Model, error)
@@ -15,17 +15,17 @@ type Methods interface {
 	Delete(s *app.Scope) error
 }
 
-type Handler struct {
-	Repo Methods
+type handler struct {
+	Repo methods
 }
 
-func NewRoutes() *Handler {
-	return &Handler{
+func newRoutes() *handler {
+	return &handler{
 		Repo: NewRepo(),
 	}
 }
 
-func (hr *Handler) save(w http.ResponseWriter, r *http.Request) {
+func (hr *handler) save(w http.ResponseWriter, r *http.Request) {
 	resp := response{}
 	Model, err := hr.Repo.Save(app.NewScope(app.DB(), r))
 	if err != nil {
@@ -43,7 +43,7 @@ func (hr *Handler) save(w http.ResponseWriter, r *http.Request) {
 	resp.ServerJSON(w)
 }
 
-func (hr *Handler) get(w http.ResponseWriter, r *http.Request) {
+func (hr *handler) get(w http.ResponseWriter, r *http.Request) {
 	resp := response{}
 	Model, err := hr.Repo.Get(app.NewScope(app.DB(), r))
 	if err != nil {
@@ -60,7 +60,7 @@ func (hr *Handler) get(w http.ResponseWriter, r *http.Request) {
 	resp.ServerJSON(w)
 }
 
-func (hr *Handler) update(w http.ResponseWriter, r *http.Request) {
+func (hr *handler) update(w http.ResponseWriter, r *http.Request) {
 	resp := response{}
 	Model, err := hr.Repo.Update(app.NewScope(app.DB(), r))
 	if err != nil {
@@ -77,7 +77,7 @@ func (hr *Handler) update(w http.ResponseWriter, r *http.Request) {
 	resp.ServerJSON(w)
 }
 
-func (hr *Handler) list(w http.ResponseWriter, r *http.Request) {
+func (hr *handler) list(w http.ResponseWriter, r *http.Request) {
 	resp := response{}
 	Admins, err := hr.Repo.List(app.NewScope(app.DB(), r))
 	if err != nil {
@@ -94,6 +94,6 @@ func (hr *Handler) list(w http.ResponseWriter, r *http.Request) {
 	resp.ServerJSON(w)
 }
 
-func (hr *Handler) delete(w http.ResponseWriter, r *http.Request) {
+func (hr *handler) delete(w http.ResponseWriter, r *http.Request) {
 
 }
