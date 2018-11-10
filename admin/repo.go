@@ -32,7 +32,7 @@ func (hr *Repo) Save(s *app.Scope) (*Admin, error) {
 	admin.CreatedAt = time.Now()
 	admin.UpdatedAt = time.Now()
 
-	if err := hr.Dao.SaveAdmin(s, admin); err != nil {
+	if err := hr.Dao.Save(s, admin); err != nil {
 		return nil, errors.NewAPIError(http.StatusInternalServerError, "500001", "Failed to save admin", err)
 	}
 	return admin, nil
@@ -42,7 +42,7 @@ func (hr *Repo) Get(s *app.Scope) (*Admin, error) {
 	admin := &Admin{}
 
 	ID := chi.URLParam(s.Request, "id")
-	err := hr.Dao.GetAdmin(s, ID, admin)
+	err := hr.Dao.Get(s, ID, admin)
 
 	if err != nil && errors.IsRecordNotFoundError(err) {
 		return nil, errors.NewAPIError(http.StatusNotFound, "404001", "admin not found", err)
@@ -59,7 +59,7 @@ func (hr *Repo) Update(s *app.Scope) (*Admin, error) {
 
 func (hr *Repo) List(s *app.Scope) ([]Admin, error) {
 	var data []Admin
-	if err := hr.Dao.ListAdmins(s, &data); err != nil {
+	if err := hr.Dao.List(s, &data); err != nil {
 		return nil, errors.NewAPIError(http.StatusInternalServerError, "500001", "Failed to list Admins", err)
 	}
 	if len(data) > 0 {
