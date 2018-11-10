@@ -7,7 +7,7 @@ import (
 	"github.com/codersgarage/black-marlin-api/errors"
 )
 
-type Model struct {
+type model struct {
 	ID        int       `sql:"id;primary key;auto_increment" json:"-"`
 	UUID      string    `sql:"uuid;not null;unique" json:"uuid"`
 	Name      string    `sql:"name" json:"name"`
@@ -17,11 +17,11 @@ type Model struct {
 	UpdatedAt time.Time `sql:"updated_at;not null" json:"updated_at"`
 }
 
-func (h *Model) TableName() string {
+func (h *model) TableName() string {
 	return "admins"
 }
 
-func (h *Model) Validate() *errors.ValidationError {
+func (h *model) Validate() *errors.ValidationError {
 	h.Name = strings.TrimSpace(h.Name)
 
 	ve := errors.ValidationError{}

@@ -8,10 +8,10 @@ import (
 )
 
 type methods interface {
-	Save(s *app.Scope) (*Model, error)
-	Get(s *app.Scope) (*Model, error)
-	Update(s *app.Scope) (*Model, error)
-	List(s *app.Scope) ([]Model, error)
+	Save(s *app.Scope) (*model, error)
+	Get(s *app.Scope) (*model, error)
+	Update(s *app.Scope) (*model, error)
+	List(s *app.Scope) ([]model, error)
 	Delete(s *app.Scope) error
 }
 
@@ -27,7 +27,7 @@ func newRoutes() *handler {
 
 func (hr *handler) save(w http.ResponseWriter, r *http.Request) {
 	resp := response{}
-	Model, err := hr.Repo.Save(app.NewScope(app.DB(), r))
+	model, err := hr.Repo.Save(app.NewScope(app.DB(), r))
 	if err != nil {
 		resp.Status = err.(*errors.APIError).Status
 		resp.Code = err.(*errors.APIError).Code
@@ -38,14 +38,14 @@ func (hr *handler) save(w http.ResponseWriter, r *http.Request) {
 	}
 
 	resp.Status = http.StatusCreated
-	resp.Data = Model
+	resp.Data = model
 	resp.Title = "Successfully created"
 	resp.ServerJSON(w)
 }
 
 func (hr *handler) get(w http.ResponseWriter, r *http.Request) {
 	resp := response{}
-	Model, err := hr.Repo.Get(app.NewScope(app.DB(), r))
+	model, err := hr.Repo.Get(app.NewScope(app.DB(), r))
 	if err != nil {
 		resp.Status = err.(*errors.APIError).Status
 		resp.Code = err.(*errors.APIError).Code
@@ -56,13 +56,13 @@ func (hr *handler) get(w http.ResponseWriter, r *http.Request) {
 	}
 
 	resp.Status = http.StatusOK
-	resp.Data = Model
+	resp.Data = model
 	resp.ServerJSON(w)
 }
 
 func (hr *handler) update(w http.ResponseWriter, r *http.Request) {
 	resp := response{}
-	Model, err := hr.Repo.Update(app.NewScope(app.DB(), r))
+	model, err := hr.Repo.Update(app.NewScope(app.DB(), r))
 	if err != nil {
 		resp.Status = err.(*errors.APIError).Status
 		resp.Code = err.(*errors.APIError).Code
@@ -73,7 +73,7 @@ func (hr *handler) update(w http.ResponseWriter, r *http.Request) {
 	}
 
 	resp.Status = http.StatusOK
-	resp.Data = Model
+	resp.Data = model
 	resp.ServerJSON(w)
 }
 
