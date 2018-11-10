@@ -20,8 +20,8 @@ func NewRepo() *Repo {
 	}
 }
 
-func (hr *Repo) Save(s *app.Scope) (*Admin, error) {
-	admin := &Admin{}
+func (hr *Repo) Save(s *app.Scope) (*Model, error) {
+	admin := &Model{}
 	if err := utils.ParseBody(s.Request, admin); err != nil {
 		return nil, errors.NewAPIError(http.StatusBadRequest, "400001", "Unable to parse request body", nil)
 	}
@@ -38,8 +38,8 @@ func (hr *Repo) Save(s *app.Scope) (*Admin, error) {
 	return admin, nil
 }
 
-func (hr *Repo) Get(s *app.Scope) (*Admin, error) {
-	admin := &Admin{}
+func (hr *Repo) Get(s *app.Scope) (*Model, error) {
+	admin := &Model{}
 
 	ID := chi.URLParam(s.Request, "id")
 	err := hr.data.Get(s, ID, admin)
@@ -53,19 +53,19 @@ func (hr *Repo) Get(s *app.Scope) (*Admin, error) {
 	return admin, nil
 }
 
-func (hr *Repo) Update(s *app.Scope) (*Admin, error) {
-	return &Admin{}, nil
+func (hr *Repo) Update(s *app.Scope) (*Model, error) {
+	return &Model{}, nil
 }
 
-func (hr *Repo) List(s *app.Scope) ([]Admin, error) {
-	var data []Admin
+func (hr *Repo) List(s *app.Scope) ([]Model, error) {
+	var data []Model
 	if err := hr.data.List(s, &data); err != nil {
 		return nil, errors.NewAPIError(http.StatusInternalServerError, "500001", "Failed to list Admins", err)
 	}
 	if len(data) > 0 {
 		return data, nil
 	}
-	return []Admin{}, nil
+	return []Model{}, nil
 }
 
 func (hr *Repo) Delete(s *app.Scope) error {

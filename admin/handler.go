@@ -8,10 +8,10 @@ import (
 )
 
 type Methods interface {
-	Save(s *app.Scope) (*Admin, error)
-	Get(s *app.Scope) (*Admin, error)
-	Update(s *app.Scope) (*Admin, error)
-	List(s *app.Scope) ([]Admin, error)
+	Save(s *app.Scope) (*Model, error)
+	Get(s *app.Scope) (*Model, error)
+	Update(s *app.Scope) (*Model, error)
+	List(s *app.Scope) ([]Model, error)
 	Delete(s *app.Scope) error
 }
 
@@ -27,7 +27,7 @@ func NewRoutes() *Handler {
 
 func (hr *Handler) save(w http.ResponseWriter, r *http.Request) {
 	resp := response{}
-	Admin, err := hr.Repo.Save(app.NewScope(app.DB(), r))
+	Model, err := hr.Repo.Save(app.NewScope(app.DB(), r))
 	if err != nil {
 		resp.Status = err.(*errors.APIError).Status
 		resp.Code = err.(*errors.APIError).Code
@@ -38,14 +38,14 @@ func (hr *Handler) save(w http.ResponseWriter, r *http.Request) {
 	}
 
 	resp.Status = http.StatusCreated
-	resp.Data = Admin
-	resp.Title = "Admin has been created"
+	resp.Data = Model
+	resp.Title = "Successfully created"
 	resp.ServerJSON(w)
 }
 
 func (hr *Handler) get(w http.ResponseWriter, r *http.Request) {
 	resp := response{}
-	Admin, err := hr.Repo.Get(app.NewScope(app.DB(), r))
+	Model, err := hr.Repo.Get(app.NewScope(app.DB(), r))
 	if err != nil {
 		resp.Status = err.(*errors.APIError).Status
 		resp.Code = err.(*errors.APIError).Code
@@ -56,13 +56,13 @@ func (hr *Handler) get(w http.ResponseWriter, r *http.Request) {
 	}
 
 	resp.Status = http.StatusOK
-	resp.Data = Admin
+	resp.Data = Model
 	resp.ServerJSON(w)
 }
 
 func (hr *Handler) update(w http.ResponseWriter, r *http.Request) {
 	resp := response{}
-	Admin, err := hr.Repo.Update(app.NewScope(app.DB(), r))
+	Model, err := hr.Repo.Update(app.NewScope(app.DB(), r))
 	if err != nil {
 		resp.Status = err.(*errors.APIError).Status
 		resp.Code = err.(*errors.APIError).Code
@@ -73,7 +73,7 @@ func (hr *Handler) update(w http.ResponseWriter, r *http.Request) {
 	}
 
 	resp.Status = http.StatusOK
-	resp.Data = Admin
+	resp.Data = Model
 	resp.ServerJSON(w)
 }
 
