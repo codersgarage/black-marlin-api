@@ -7,7 +7,7 @@ import (
 	"github.com/codersgarage/black-marlin-api/errors"
 )
 
-type ApiRepo interface {
+type Methods interface {
 	Save(s *app.Scope) (*Admin, error)
 	Get(s *app.Scope) (*Admin, error)
 	Update(s *app.Scope) (*Admin, error)
@@ -15,17 +15,17 @@ type ApiRepo interface {
 	Delete(s *app.Scope) error
 }
 
-type ApiRoutes struct {
-	Repo ApiRepo
+type Handler struct {
+	Repo Methods
 }
 
-func NewRoutes() *ApiRoutes {
-	return &ApiRoutes{
+func NewRoutes() *Handler {
+	return &Handler{
 		Repo: NewRepo(),
 	}
 }
 
-func (hr *ApiRoutes) save(w http.ResponseWriter, r *http.Request) {
+func (hr *Handler) save(w http.ResponseWriter, r *http.Request) {
 	resp := response{}
 	Admin, err := hr.Repo.Save(app.NewScope(app.DB(), r))
 	if err != nil {
@@ -43,7 +43,7 @@ func (hr *ApiRoutes) save(w http.ResponseWriter, r *http.Request) {
 	resp.ServerJSON(w)
 }
 
-func (hr *ApiRoutes) get(w http.ResponseWriter, r *http.Request) {
+func (hr *Handler) get(w http.ResponseWriter, r *http.Request) {
 	resp := response{}
 	Admin, err := hr.Repo.Get(app.NewScope(app.DB(), r))
 	if err != nil {
@@ -60,7 +60,7 @@ func (hr *ApiRoutes) get(w http.ResponseWriter, r *http.Request) {
 	resp.ServerJSON(w)
 }
 
-func (hr *ApiRoutes) update(w http.ResponseWriter, r *http.Request) {
+func (hr *Handler) update(w http.ResponseWriter, r *http.Request) {
 	resp := response{}
 	Admin, err := hr.Repo.Update(app.NewScope(app.DB(), r))
 	if err != nil {
@@ -77,7 +77,7 @@ func (hr *ApiRoutes) update(w http.ResponseWriter, r *http.Request) {
 	resp.ServerJSON(w)
 }
 
-func (hr *ApiRoutes) list(w http.ResponseWriter, r *http.Request) {
+func (hr *Handler) list(w http.ResponseWriter, r *http.Request) {
 	resp := response{}
 	Admins, err := hr.Repo.List(app.NewScope(app.DB(), r))
 	if err != nil {
@@ -94,6 +94,6 @@ func (hr *ApiRoutes) list(w http.ResponseWriter, r *http.Request) {
 	resp.ServerJSON(w)
 }
 
-func (hr *ApiRoutes) delete(w http.ResponseWriter, r *http.Request) {
+func (hr *Handler) delete(w http.ResponseWriter, r *http.Request) {
 
 }
