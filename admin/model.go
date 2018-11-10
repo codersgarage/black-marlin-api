@@ -12,6 +12,7 @@ type Admin struct {
 	UUID      string    `sql:"uuid;not null;unique" json:"uuid"`
 	Name      string    `sql:"name" json:"name"`
 	Email     string    `sql:"email" json:"email"`
+	Password  string    `sql:"password" json:"password"`
 	CreatedAt time.Time `sql:"created_at;not null" json:"created_at"`
 	UpdatedAt time.Time `sql:"updated_at;not null" json:"updated_at"`
 }
