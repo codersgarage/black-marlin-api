@@ -11,13 +11,14 @@ import (
 var instance *gorm.DB
 
 func ConnectDB() error {
-	db, err := gorm.Open("mysql",
-		fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?charset=utf8&parseTime=True&loc=Local",
+	db, err := gorm.Open("postgres",
+		fmt.Sprintf("user=%s password=%s host=%s port=%d dbname=%s sslmode=disable",
 			config.DB().Username, config.DB().Password,
 			config.DB().Host, config.DB().Port, config.DB().Name))
 	if err != nil {
 		return err
 	}
+
 	db.LogMode(true)
 	db.SetLogger(log.Log())
 
