@@ -2,3 +2,4 @@
 vendor
 ./black-marlin-api
 glide.lock
+storage

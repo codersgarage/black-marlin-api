@@ -2,7 +2,7 @@ package models
 
 import "time"
 
-type Session struct {
+type AdminSession struct {
 	ID           int64     `sql:"id;primary key;auto_increment" json:"id"`
 	UserID       int64     `sql:"user_id;not null;index" json:"user_id"`
 	AccessToken  string    `sql:"access_token;not null;unique" json:"access_token"`
@@ -11,6 +11,6 @@ type Session struct {
 	ExpiresIn    int64     `sql:"expires_in;not null" json:"expires_in"` // In hours
 }
 
-func (ss *Session) TableName() string {
-	return "sessions"
+func (as *AdminSession) TableName() string {
+	return "admin_sessions"
 }

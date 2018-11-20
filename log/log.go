@@ -14,10 +14,6 @@ func SetupLog() {
 	defLogger.AddHook(hooks.NewHook())
 }
 
-func getLevels() {
-
-}
-
 func Log() *logrus.Logger {
 	return defLogger
 }
