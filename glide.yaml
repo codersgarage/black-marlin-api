@@ -1,27 +1,10 @@
 package: github.com/codersgarage/black-marlin-api
-
 import:
 - package: github.com/RichardKnop/machinery
   version: ^1.4.9
   subpackages:
   - v1
   - v1/config
-- package: github.com/codersgarage/black-marlin-api
-  subpackages:
-  - api
-  - app
-  - cmd
-  - cmd/migration
-  - config
-  - data
-  - errors
-  - log
-  - log/hooks
-  - models
-  - mq
-  - repos
-  - utils
-  - worker
 - package: github.com/go-chi/chi
   version: ^3.3.3
   subpackages:
@@ -38,3 +21,5 @@ import:
   version: ^1.2.1
   subpackages:
   - remote
+- package: github.com/satori/go.uuid
+  version: ^1.2.0
