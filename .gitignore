@@ -1,2 +1,5 @@
 .idea
-black-marlin-api
+vendor
+./black-marlin-api
+glide.lock
+storage

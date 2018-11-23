@@ -5,19 +5,17 @@ import (
 	"github.com/codersgarage/black-marlin-api/app"
 	"github.com/codersgarage/black-marlin-api/config"
 	"github.com/codersgarage/black-marlin-api/log"
-	"github.com/codersgarage/black-marlin-api/mq"
-	"github.com/codersgarage/black-marlin-api/worker"
 	"os"
 
 	"github.com/spf13/cobra"
 )
 
 var (
-	// RootCmd is the root command of boot-kit service
+	// RootCmd is the root command of black-marlin-api service
 	RootCmd = &cobra.Command{
-		Use:   "quest",
-		Short: "quest is a grpc/http service",
-		Long:  `An gRPC/HTTP JSON API backend service of boot-kit`,
+		Use:   "black-marlin-api",
+		Short: "black-marlin-api is a grpc/http service",
+		Long:  `An gRPC/HTTP JSON API backend service of black-marlin-api`,
 	}
 )
 
@@ -38,13 +36,9 @@ func Execute() {
 		log.Log().Fatalf("Failed to connect to database : %v\n", err)
 		os.Exit(-1)
 	}
-	if err := mq.ConnectMQ(); err != nil {
-		log.Log().Fatalf("Failed to connect to queue server: %v\n", err)
-	}
-	worker.RunWorker()
 
 	if err := RootCmd.Execute(); err != nil {
-		fmt.Println(err)
+		log.Log().Fatalf("Failed to execute root command : %v\n", err)
 		os.Exit(1)
 	}
 }

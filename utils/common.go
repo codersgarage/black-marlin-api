@@ -2,6 +2,7 @@ package utils
 
 import (
 	"encoding/json"
+	"github.com/satori/go.uuid"
 	"net/http"
 	"strconv"
 )
@@ -16,4 +17,9 @@ func ParseInt(s string) (int, error) {
 		return 0, err
 	}
 	return int(v), nil
+}
+
+func UUID() string {
+	v := uuid.NewV4()
+	return v.String()
 }

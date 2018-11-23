@@ -1,15 +1,17 @@
 version: '2'
 
 services:
-  database:
+  pg:
     image: postgres:11
     restart: always
     ports:
-    - 5432:5432
+    - "5432:5432"
     environment:
-      POSTGRES_USER: root
       POSTGRES_PASSWORD: boom
-      POSTGRES_DB: black_marlin_api
+      POSTGRES_USER: root
+      POSTGRES_DB: black_marlin
+    volumes:
+    - ./storage/pg:/var/lib/postgresql/data
 
   consul:
     image: consul
