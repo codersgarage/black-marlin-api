@@ -3,27 +3,8 @@ app:
   port: 5005
   log_level: debug
 database:
-  host: "localhost"
+  host: localhost
   port: 5432
-  username: "root"
-  password: "boom"
-  name: "black_marlin_api"
-
-redis:
-  port: 6789
-  password: ""
-  db: 0
-  prefix: "black-marlin-api"
-
-mq:
-  broker: "amqp://guest:guest@localhost:5672/"
-  default_queue: "machinery_tasks"
-  result_backend: "amqp://guest:guest@localhost:5672/"
-  amqp:
-    exchange: "machinery_exchange"
-    exchange_type: "direct"
-    binding_key: "machinery_task"
-    prefetch_count: 10
-  worker:
-    name: "hello-worker"
-    count: 10
+  username: root
+  password: boom
+  name: black_marlin

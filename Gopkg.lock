@@ -326,6 +326,14 @@
   version = "v1.2.0"
 
 [[projects]]
+  digest = "1:274f67cb6fed9588ea2521ecdac05a6d62a8c51c074c1fccc6a49a40ba80e925"
+  name = "github.com/satori/go.uuid"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "f58768cc1a7a7e77a3bd49e98cdd21419399b6a3"
+  version = "v1.2.0"
+
+[[projects]]
   digest = "1:69b1cc331fca23d702bd72f860c6a647afd0aa9fcbc1d0659b1365e26546dd70"
   name = "github.com/sirupsen/logrus"
   packages = ["."]
@@ -443,9 +451,11 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:18236c5bb3baa556d984c0dfed68dc9963bfb14991c6aaf815ae58ec37dd7b1f"
+  digest = "1:af9480a3419417f3645d2e7d3c12039d80ac0bc52aad842c572417c3e8075d37"
   name = "golang.org/x/crypto"
   packages = [
+    "bcrypt",
+    "blowfish",
     "cast5",
     "openpgp",
     "openpgp/armor",
@@ -655,10 +665,12 @@
     "github.com/go-chi/chi/middleware",
     "github.com/jinzhu/gorm",
     "github.com/jinzhu/gorm/dialects/postgres",
+    "github.com/satori/go.uuid",
     "github.com/sirupsen/logrus",
     "github.com/spf13/cobra",
     "github.com/spf13/viper",
     "github.com/spf13/viper/remote",
+    "golang.org/x/crypto/bcrypt",
   ]
   solver-name = "gps-cdcl"
   solver-version = 1
